@@ -1,11 +1,11 @@
 services:
   - type: web
     name: scrollsnap-backend
-    env: node
-    runtime: node
-    region: oregon
-    plan: free
-    buildCommand: npm install
-    startCommand: npm start
+    runtime: bun
+    repo: https://github.com/johnnyrockets3005/scrollsnap-backend
     branch: main
-    healthCheckPath: /api/health
+    buildCommand: bun install
+    startCommand: bun run start
+    rootDir: src
+    plan: free
+    region: oregon
