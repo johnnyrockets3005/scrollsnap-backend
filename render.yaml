@@ -1,11 +1,11 @@
 services:
   - type: web
     name: scrollsnap-backend
+    env: node
     runtime: node
     region: oregon
     plan: free
     buildCommand: npm install
     startCommand: npm start
-    envVars:
-      - key: NODE_VERSION
-        value: 18.18.2
+    branch: main
+    healthCheckPath: /api/health
