@@ -1,13 +1,11 @@
 services:
   - type: web
     name: scrollsnap-backend
-    env: node
+    runtime: node
+    region: oregon
     plan: free
     buildCommand: npm install
     startCommand: npm start
-    repo: https://github.com/johnnyrockets3005/scrollsnap-backend
-    branch: main
-    autoDeploy: true
     envVars:
       - key: NODE_VERSION
         value: 18.18.2
