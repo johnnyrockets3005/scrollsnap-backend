@@ -1,11 +1,13 @@
 services:
   - type: web
     name: scrollsnap-backend
-    runtime: node  # ✅ must be node even if you're using Bun
+    runtime: node
     repo: https://github.com/johnnyrockets3005/scrollsnap-backend
     branch: main
     buildCommand: |
       curl -fsSL https://bun.sh/install | bash
+      echo 'export BUN_INSTALL="$HOME/.bun"' >> ~/.bashrc
+      echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> ~/.bashrc
       export BUN_INSTALL="$HOME/.bun"
       export PATH="$BUN_INSTALL/bin:$PATH"
       bun install --no-cache
