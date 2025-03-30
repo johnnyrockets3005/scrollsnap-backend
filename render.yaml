@@ -7,5 +7,6 @@ services:
     buildCommand: bun install
     startCommand: bun run start
     rootDir: src
+    healthCheckPath: /api/healthz
     plan: free
     region: oregon
