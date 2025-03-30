@@ -2,7 +2,7 @@
   "name": "scrollsnap-backend",
   "version": "1.0.0",
   "scripts": {
-    "start": "bun run index.ts" // or "bun run index.js"
+    "start": "bun index.ts"
   },
   "dependencies": {
     "express": "^4.18.2"
