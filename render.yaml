@@ -1,18 +1,13 @@
 services:
   - type: web
     name: scrollsnap-backend
-    runtime: node
+    runtime: bun
     repo: https://github.com/johnnyrockets3005/scrollsnap-backend
     branch: main
     buildCommand: |
-      curl -fsSL https://bun.sh/install | bash
-      export BUN_INSTALL="$HOME/.bun"
-      export PATH="$BUN_INSTALL/bin:$PATH"
       bun install
-    startCommand: |
-      export BUN_INSTALL="$HOME/.bun"
-      export PATH="$BUN_INSTALL/bin:$PATH"
-      bun run start
+      rm -f bun.lockb
+    startCommand: bun run start
     rootDir: src
     healthCheckPath: /api/healthz
     plan: free
