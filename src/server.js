@@ -1,31 +1,28 @@
 import express from 'express';
 import cors from 'cors';
-import { captureScreenshot } from './utils/screenshotUtil.js';
+import screenshotUtil from './utils/screenshotUtil.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'ScrollSnap backend running' });
+app.get('/api/healthz', (req, res) => {
+  res.json({ status: 'ok' });
 });
 
 app.post('/api/screenshot', async (req, res) => {
-  const { url } = req.body;
-
-  if (!url || !url.startsWith('http')) {
-    return res.status(400).json({ error: 'Invalid or missing URL' });
-  }
-
+  const { url, device, format } = req.body;
   try {
-    const buffer = await captureScreenshot(url);
-    res.set('Content-Type', 'image/png');
-    res.send(buffer);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Screenshot capture failed.' });
+    const imageBuffer = await screenshotUtil(url, { device, format });
+    res.set('Content-Type', `image/${format || 'png'}`);
+    res.send(imageBuffer);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Screenshot failed' });
   }
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`ScrollSnap backend listening on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
