@@ -1,16 +1,12 @@
 services:
   - type: web
     name: scrollsnap-backend
-    runtime: node # Use node because Render does not yet support 'bun' as runtime
+    runtime: bun
     repo: https://github.com/johnnyrockets3005/scrollsnap-backend
     branch: main
     buildCommand: |
-      curl -fsSL https://bun.sh/install | bash
-      export PATH="$HOME/.bun/bin:$PATH"
-      bun install
-    startCommand: |
-      export PATH="$HOME/.bun/bin:$PATH"
-      bun run start
+      bun install --no-cache
+    startCommand: bun run start
     rootDir: src
     healthCheckPath: /api/healthz
     plan: free
